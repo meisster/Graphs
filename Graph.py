@@ -107,6 +107,42 @@ class Graph:
         self.sorted.insert(0, list(self.verticesList.keys())[0])
         print(self.sorted)
 
+
+    def HamiltonMSAS_recurrent(self, v, stack):
+        vert = self.getVertex(v)
+        stack.append(v)
+        vert.visited = True
+        print(stack)
+        if self.verticesMatrix[v-1][self.start-1] ==1:
+            if len(stack) == self.verticesCount:
+                stack.append(self.start)
+                self.start = -1
+                return stack
+            else:
+                #stack.remove(v)
+                #vert.visited = False
+                for i in range(self.verticesCount):
+                    if self.verticesMatrix[v - 1][i] == 1:
+                        if not self.getVertex(i+1).visited:
+                            self.HamiltonMSAS_recurrent(i+1, stack)
+        else:
+            for i in self.verticesList:
+                if self.verticesMatrix[v - 1][i - 1] == 1:
+                    if not self.getVertex(i).visited:
+                        self.HamiltonMSAS_recurrent(i, stack)
+
+    def HamiltonMSAS(self, v, stack):
+        for u in self.verticesList:
+            if self.start != -1:
+                for k in self.verticesList:
+                    self.getVertex(k).visited = False
+                print(u)
+                stack = []
+                self.start = u
+                self.HamiltonMSAS_recurrent(u, stack)
+            else:
+                return stack
+
     def HamiltonLNAS_recurrent(self, v, stack):
         vert = self.getVertex(v)
         stack.append(v)
@@ -131,6 +167,8 @@ class Graph:
     def HamiltonLNAS(self, v, stack):
         for u in self.verticesList:
             if self.start != -1:
+                for k in self.verticesList:
+                    self.getVertex(k).visited = False
                 stack = []
                 self.start = u
                 self.HamiltonLNAS_recurrent(u, stack)
