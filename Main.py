@@ -50,4 +50,5 @@ gr.addEdge(5,4)
 gr.addEdge(4,2)
 gr.addEdge(4,6)
 gr.addEdge(6,1)
+
 print(gr.HamiltonLNAS(1, stack=s))
