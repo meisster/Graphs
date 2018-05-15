@@ -14,6 +14,8 @@ class Graph:
         self.counter = 0
         stack = []
         self.start = 0
+        self.vertCounter = 0
+        self.stack = []
 
     def addVertex(self, key):
         if key not in self.verticesList:
@@ -84,35 +86,10 @@ class Graph:
                         print(self.verticesMatrix[i - 1][j], end=', ')
                 print()
 
-    def visitVertex(self, v):
-        for i in range(self.verticesCount):
-            if self.verticesMatrix[v.id - 1][i] == 1:
-                if self.getVertex(i + 1).getColor() == 'white':
-                    self.getVertex(i + 1).setColor('gray')
-                    #v.setColor('gray')
-                    self.visitVertex(self.getVertex(i + 1))
-                    if self.getVertex(i + 1).getColor() == 'gray':
-                        self.getVertex(i + 1).setColor('black')
-                        self.sorted.insert(0, self.getVertex(i + 1).id)
-                    elif not self.getVertex(i + 1).beginNas:
-                        self.getVertex(i + 1).setColor('black')
-                        self.sorted.insert(0, self.getVertex(i + 1).id)
-
-
-    def DFS_msasiedztwa(self):
-        self.sorted = []
-        for u in self.verticesList:
-            if self.getVertex(u).getColor() == 'white':
-                self.visitVertex(self.getVertex(u))
-        self.sorted.insert(0, list(self.verticesList.keys())[0])
-        print(self.sorted)
-
-
     def HamiltonMSAS_recurrent(self, v, stack):
         vert = self.getVertex(v)
         stack.append(v)
         vert.visited = True
-        print(stack)
         if self.verticesMatrix[v-1][self.start-1] ==1:
             if len(stack) == self.verticesCount:
                 stack.append(self.start)
@@ -136,7 +113,6 @@ class Graph:
             if self.start != -1:
                 for k in self.verticesList:
                     self.getVertex(k).visited = False
-                print(u)
                 stack = []
                 self.start = u
                 self.HamiltonMSAS_recurrent(u, stack)

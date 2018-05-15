@@ -5,20 +5,11 @@ import matplotlib.pyplot as plt
 from tkinter import ttk
 from Graph import *
 
-isCreated = False
 
-
-def createMatrix(size, g, type):
-    if type == 1:
-        g.verticesMatrix = [0] * size
-        for i in range(size):
-            g.verticesMatrix[i] = [0] * size
-    elif type == 2:
-        g.graphMatrix = [0] * size
-        for i in range(size):
-            g.graphMatrix[i] = [0] * size
-    else:
-        print('Zły typ danych!')
+def createMatrix(size, g):
+    g.verticesMatrix = [0] * size
+    for i in range(size):
+        g.verticesMatrix[i] = [0] * size
 
 
 grafS = Graph(1)
