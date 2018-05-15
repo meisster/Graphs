@@ -111,11 +111,8 @@ class Graph:
         vert = self.getVertex(v)
         stack.append(v)
         vert.visited = True
-        print(stack)
         if self.start in vert.listaNas:
             if len(stack) == self.verticesCount:
-                print('niby jest')
-                print(self.start, vert.listaNas)
                 stack.append(self.start)
                 self.start = -1
                 return stack
